@@ -10,25 +10,26 @@ export class AppComponent {
   moves: string = '';
   countDownInscrutions: number = 15;
   movesList: string[][] = [];
-  showValidationError: boolean = false;
-
+  validationMsg: string = '';
   constructor(private robotService: RobotService) {}
 
   public send() {
     if (this.moves == '' || !this.isValidJSON(this.moves)) {
-      this.showValidationError = true;
+      this.validationMsg = 'The input is empty or in wrong format';
       return;
     }
 
-    this.showValidationError = false;
+    this.validationMsg = '';
     this.countDownInscrutions--;
     this.robotService.trackRobot(JSON.parse(this.moves)).subscribe(
       (location) => {
         this.movesList.push(location);
         this.moves = '';
+        this.validationMsg = '';
       },
       (err) => {
         console.log(err);
+        this.validationMsg = err.error;
       }
     );
   }
