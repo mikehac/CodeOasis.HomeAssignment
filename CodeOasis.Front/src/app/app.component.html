@@ -1,0 +1,14 @@
+<h3>Robot's Dashboard</h3>
+<div>
+  <div>You can send {{ countDownInscrutions }} instructions</div>
+  <input
+    type="text"
+    placeholder="Please enter next moves"
+    [(ngModel)]="moves"
+    title="The expected format is:['right 0', 'up 0', 'left 0', 'down 0']"
+  />
+  <button (click)="send()" [disabled]="countDownInscrutions == 0">Send</button>
+  <ul>
+    <li *ngFor="let m of movesList">{{ m }}</li>
+  </ul>
+</div>
