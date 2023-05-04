@@ -7,7 +7,7 @@
         public int[] TrackRobot(string[] movements)
         {
             if (!IsValidInput(movements))
-                throw new ArgumentException("The input is invalid");            
+                throw new ArgumentException("The input is invalid");
 
             Dictionary<string, int> parsedMovement = new Dictionary<string, int>();
             foreach (var movement in movements)
@@ -29,7 +29,7 @@
 
             int horizontal = right - left;
             int vertical = up - down;
-            if (OutOfBoundaries(horizontal,vertical))
+            if (OutOfBoundaries(horizontal, vertical))
                 throw new ApplicationException("The robot can't go out of boundaries");
 
             return new int[] { horizontal, vertical };
@@ -54,7 +54,8 @@
                 value = x.Split(' ')[1]
             });
 
-            if (splited.Any(x => (!instructions.Contains(x.key) || int.Parse(x.value) < 0)))
+            if (splited.Any(x => (!instructions.Contains(x.key) ||
+                                  !int.TryParse(x.value, out int value) || value < 0)))
                 return false;
 
             return true;
