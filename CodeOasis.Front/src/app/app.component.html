@@ -8,6 +8,9 @@
     title="The expected format is:['right 0', 'up 0', 'left 0', 'down 0']"
   />
   <button (click)="send()" [disabled]="countDownInscrutions == 0">Send</button>
+  <div class="errorMsg" *ngIf="showValidationError">
+    The input is empty or in wrong format
+  </div>
   <ul>
     <li *ngFor="let m of movesList">{{ m }}</li>
   </ul>
